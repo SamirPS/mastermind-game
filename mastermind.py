@@ -43,8 +43,7 @@ def creationcombi():
  
  
 def iacombi(pool) :
-    ia=random.choice(pool)
-    return ia
+    return random.choice(pool)
  
 def testliste(test):
     while len(list(set(test)))!=4 or max(test)>4:
@@ -53,10 +52,12 @@ def testliste(test):
             print("le chiffre max c'est 4")
         elif len(list(set(test)))!=4:
             print("on veut pas de doublon")
-        cf1,cf2,cf3,cf4= [int(x) for x in input("Rentre une combinaison : (4 chiffres sépare par des espaces de 0 a 4 qui doivent être différents )\n ").split()]
-        test=[cf1,cf2,cf3,cf4]
+        test=demandechiffre()
 
-        
+def demandechiffre():
+    cf1,cf2,cf3,cf4= [int(x) for x in input("Rentre une combinaison : (4 chiffres sépare par des espaces de 0 a 4 qui doivent être différents )\n").split()]
+    return [cf1,cf2,cf3,cf4]
+  
 def comparer(combi,test,reussite) :
     reussite["mauvais"],reussite["bon"]=0,0
     for i in range(4):
@@ -70,12 +71,7 @@ def comparer(combi,test,reussite) :
         print("vous avez ",reussite["bon"],"pions bien placés et ",reussite["mauvais"],"pions mal placés")
     return reussite
  
-
-def demandechiffre():
-    cf1,cf2,cf3,cf4= [int(x) for x in input("Rentre une combinaison : (4 chiffres sépare par des espaces de 0 a 4 qui doivent être différents )\n").split()]
-    return [cf1,cf2,cf3,cf4]
-    
-def eliminate(ia, reussite, combiAEliminer):
+ def eliminate(ia, reussite, combiAEliminer):
     i=0
     if reussite["mauvais"]+reussite["bon"]==4:
         for i in range(0,4):
@@ -133,6 +129,7 @@ elif choix==2:
     ia=iacombi(pool)
 
     comparer(test,ia,reussite)
+    
     for i in range(len(pool)):
             combi=iacombi(pool)
             pool=eliminate(ia, reussite, combi)
@@ -143,6 +140,7 @@ elif choix==2:
             print("l'ia a trouve",c,"coup")
             break
         c=c+1
+        
         for i in range(len(pool)):
             combi=iacombi(pool)
             pool=eliminate(ia, reussite, combi)
