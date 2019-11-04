@@ -6,6 +6,8 @@ Created on Sat Sep 15 18:26:09 2018
 @author: samir
 """
 import random
+import itertools
+
 couleurchiffre=[0,1,2,3,4]
 
 choix=int(input("1)Trouve la combi fait par l'ia  2) Crée une combi que l'ia doit trouver \n"))
