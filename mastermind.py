@@ -7,6 +7,7 @@ Created on Sat Sep 15 18:26:09 2018
 """
 import random
 couleurchiffre=[0,1,2,3,4]
+
 choix=int(input("1)Trouve la combi fait par l'ia  2) Crée une combi que l'ia doit trouver \n"))
 while choix!=1 and choix!=2:
     choix=int(input("1)Trouve la combi fait par l'ia  2) Crée une combi que l'ia doit trouver \n"))
@@ -19,6 +20,7 @@ reussite={
         "mauvais":0,
         "nbr":0
          }
+
 def valeur(pool):
     L=[]
     for j in range(121):
@@ -27,8 +29,8 @@ def valeur(pool):
             L=[]
         else:
             pool.append(L)
-        
     return pool
+
 def nbrdetour(niveau,reussite):
     if niveau=="1" :
         reussite["nbr"]=15
@@ -50,7 +52,17 @@ def iacombi(pool) :
     ia=random.choice(pool)
     return ia
  
- 
+def testliste(test):
+    while len(list(set(test)))!=4 or max(test)>4:
+
+        if max(test)>4:
+            print("le chiffre max c'est 4")
+        elif len(list(set(test)))!=4:
+            print("on veut pas de doublon")
+        cf1,cf2,cf3,cf4= [int(x) for x in input("Rentre une combinaison : (4 chiffres sépare par des espaces de 0 a 4 qui doivent être différents )\n ").split()]
+        test=[cf1,cf2,cf3,cf4]
+
+        
 def comparer(combi,test,reussite) :
     reussite["mauvais"],reussite["bon"]=0,0
     for i in range(4):
@@ -65,7 +77,10 @@ def comparer(combi,test,reussite) :
     return reussite
  
 
- 
+def demandechiffre():
+    cf1,cf2,cf3,cf4= [int(x) for x in input("Rentre une combinaison : (4 chiffres sépare par des espaces de 0 a 4 qui doivent être différents )\n").split()]
+    return [cf1,cf2,cf3,cf4]
+    
 def eliminate(ia, reussite, combiAEliminer):
     i=0
     if reussite["mauvais"]+reussite["bon"]==4:
@@ -81,43 +96,33 @@ def eliminate(ia, reussite, combiAEliminer):
         else :
             pool.remove(combiAEliminer)
     return pool
+
 if choix==1:
     niveau=input("1)Facile 2)Moyen 3) Difficile\n")
     while niveau!="1" and niveau!="2" and niveau!="3":
         niveau=input("1)Facile 2)Moyen 3) Difficile\n")
         
     nbrdetour(niveau,reussite)
-    print("Vous avez",reussite["nbr"],"coups possible")
-    cf1,cf2,cf3,cf4= [int(x) for x in input("Rentre une combinaison : (4 chiffres sépare par des espaces de 0 a 4 qui doivent être différents )\n on doit pas avoir deux fois le même chiffre \n").split()]
-    test=[cf1,cf2,cf3,cf4]
-    test=list(set(test))
-    while len(test)!=4 or max(test)>4:
-        if max(test)>4:
-            print("le chiffre max c'est 4")
-        elif len(test)!=4:
-            print("on veut pas de doublon")
-        cf1,cf2,cf3,cf4= [int(x) for x in input("Rentre une combinaison : (4 chiffres sépare par des espaces de 0 a 4 qui doivent être différents )\n on doit pas avoir deux fois le même chiffre \n").split()]
-        test=[cf1,cf2,cf3,cf4]
-        test=list(set(test))
     combi=creationcombi()
+    print("Vous avez",reussite["nbr"],"coups possible")
+    
+    
+    test=demandechiffre()
+    testliste(test)
+    
+    
     comparer(combi,test,reussite)
+
     reussite["nbr"]-=1
     print("il vous reste",reussite["nbr"],"coups")
     while reussite["avis"]==0  and reussite["nbr"]!=0 and reussite["nbr"]!=0:
-        reussite["nbr"]-=1#passer de 500 coups a 160 puis 100 fait 
-        cf1,cf2,cf3,cf4=[int(x) for x in input("Rentre une combinaison : (4 chiffres sépare par des espaces de 0 a 4 qui doivent être différents )\n on doit pas avoir deux fois le même chiffre \n").split()]
-        test=[cf1,cf2,cf3,cf4]
-        while len(test)!=4 or max(test)>4:
-            if max(test)>4:
-                print("le chiffre max c'est 4")
-            elif len(test)!=4:
-                print("on veut pas de doublon")
-            cf1,cf2,cf3,cf4= [int(x) for x in input("Rentre une combinaison : (4 chiffres sépare par des espaces de 0 a 4 qui doivent être différents )\n on doit pas avoir deux fois le même chiffre \n").split()]
-            test=[cf1,cf2,cf3,cf4]
-            test=list(set(test))
+        reussite["nbr"]-=1
+        test=demandechiffre()
+        testliste(test)
+            
         comparer(combi,test,reussite)
         if reussite["avis"] ==1:
-            print("Tu es fort, tu as trouvé en",c,"coup")
+            print("Tu es fort, tu as trouvé en",c+2,"coup")
             print(combi)
             break
          
@@ -127,19 +132,11 @@ if choix==1:
             print("Perdu la combi était",combi)
      
 elif choix==2:
-    cf1,cf2,cf3,cf4= [int(x) for x in input("Rentre une combinaison : (4 chiffres sépare par des espaces de 0 a 4 qui doivent être différents )\n on doit pas avoir deux fois le même chiffre \n").split()]
-    test=[cf1,cf2,cf3,cf4]
-    test=list(set(test))
-    while len(test)!=4 or max(test)>4:
-            if max(test)>4:
-                print("le chiffre max c'est 4")
-            elif len(test)!=4:
-                print("on veut pas de doublon")
-            cf1,cf2,cf3,cf4= [int(x) for x in input("Rentre une combinaison : (4 chiffres sépare par des espaces de 0 a 4 qui doivent être différents )\n on doit pas avoir deux fois le même chiffre \n").split()]
-            test=[cf1,cf2,cf3,cf4]
-            test=list(set(test))
+    test=demandechiffre()
+    testliste(test)
     pool=valeur(pool)
     ia=iacombi(pool)
+    
     print("l'ia propose ca ",ia)
     comparer(test,ia,reussite)
     for i in range(len(pool)):
