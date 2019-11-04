@@ -71,7 +71,7 @@ def comparer(combi,test,reussite) :
         print("vous avez ",reussite["bon"],"pions bien placés et ",reussite["mauvais"],"pions mal placés")
     return reussite
  
- def eliminate(ia, reussite, combiAEliminer):
+def eliminate(ia, reussite, combiAEliminer):
     i=0
     if reussite["mauvais"]+reussite["bon"]==4:
         for i in range(0,4):
