@@ -106,49 +106,46 @@ if choix==1:
     combi=creationcombi()
     print("Vous avez",reussite["nbr"],"coups possible")
     
-    
     test=demandechiffre()
     testliste(test)
-    
-    
     comparer(combi,test,reussite)
+
 
     reussite["nbr"]-=1
     print("il vous reste",reussite["nbr"],"coups")
-    while reussite["avis"]==0  and reussite["nbr"]!=0 and reussite["nbr"]!=0:
+    
+    while reussite["avis"]==0  and reussite["nbr"]!=0:
         reussite["nbr"]-=1
         test=demandechiffre()
         testliste(test)
-            
         comparer(combi,test,reussite)
+
         if reussite["avis"] ==1:
             print("Tu es fort, tu as trouvé en",c+2,"coup")
             print(combi)
             break
-         
+
         print("il reste ",reussite["nbr"],"coups")
         c=c+1
-        if reussite["nbr"]==0 :
-            print("Perdu la combi était",combi)
+        
+    if reussite["nbr"]==0 :
+        print("Perdu la combi était",combi)
      
 elif choix==2:
     test=demandechiffre()
     testliste(test)
     pool=valeur(pool)
     ia=iacombi(pool)
-    
-    print("l'ia propose ca ",ia)
+
     comparer(test,ia,reussite)
     for i in range(len(pool)):
             combi=iacombi(pool)
             pool=eliminate(ia, reussite, combi)
     while reussite["avis"]==0  and c!=260: 
         ia=iacombi(pool)
-        print("l'ia propose ca ",ia)
         comparer(test,ia,reussite)
         if reussite["avis"] ==1:
             print("l'ia a trouve",c,"coup")
-            print("la combi était",test)
             break
         c=c+1
         for i in range(len(pool)):
@@ -156,4 +153,3 @@ elif choix==2:
             pool=eliminate(ia, reussite, combi)
     if c>=260 :
         print("l'ia a perdu")
-        print("la combi était",test)
