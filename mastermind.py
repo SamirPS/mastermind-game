@@ -24,7 +24,7 @@ reussite={
          }
 
 def valeur(pool,couleurchiffre):
-    for x in itertools.permutations(couleurchiffre,4)
+    for x in itertools.permutations(couleurchiffre,4):
         pool.append(list(x))
     return pool
 
