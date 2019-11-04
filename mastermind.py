@@ -39,10 +39,7 @@ def nbrdetour(niveau,reussite):
  
  
 def creationcombi():
-    combi = [0,0,0,0]
-    combi = random.sample(couleurchiffre,4)	
-
-    return combi
+    return random.sample(couleurchiffre,4)	
  
  
 def iacombi(pool) :
