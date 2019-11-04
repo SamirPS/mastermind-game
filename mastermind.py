@@ -50,7 +50,7 @@ def testliste(test):
 
         if max(test)>4:
             print("le chiffre max c'est 4")
-        elif len(list(set(test)))!=4:
+        else:
             print("on veut pas de doublon")
         test=demandechiffre()
 
