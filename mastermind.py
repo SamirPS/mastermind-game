@@ -21,14 +21,9 @@ reussite={
         "nbr":0
          }
 
-def valeur(pool):
-    L=[]
-    for j in range(121):
-        L=random.sample(couleurchiffre,4)
-        if random.sample(couleurchiffre,4) in pool:
-            L=[]
-        else:
-            pool.append(L)
+def valeur(pool,couleurchiffre):
+    for x in itertools.permutations(couleurchiffre,4)
+        pool.append(list(x))
     return pool
 
 def nbrdetour(niveau,reussite):
@@ -134,7 +129,8 @@ if choix==1:
 elif choix==2:
     test=demandechiffre()
     testliste(test)
-    pool=valeur(pool)
+    pool=valeur(pool,couleurchiffre)
+    
     ia=iacombi(pool)
 
     comparer(test,ia,reussite)
