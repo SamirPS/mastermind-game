@@ -24,17 +24,11 @@ reussite={
          }
 
 def valeur(pool,couleurchiffre):
-    for x in itertools.permutations(couleurchiffre,4):
-        pool.append(list(x))
-    return pool
+    return [list(x) for x in itertools.permutations(couleurchiffre,4)]
 
 def nbrdetour(niveau,reussite):
-    if niveau=="1" :
-        reussite["nbr"]=15
-    elif niveau=="2" :
-        reussite["nbr"]=10
-    elif niveau=="3" :
-        reussite["nbr"]=6
+    
+    reussite["nbr"]=20-5*int(niveau)
     return reussite
  
  
@@ -46,25 +40,29 @@ def iacombi(pool) :
     return random.choice(pool)
  
 def testliste(test):
-    while len(list(set(test)))!=4 or max(test)>4:
+    while len(list(set(test)))!=4 or (test[1] not in [0,1,2,3,4] or test[2]  not in [0,1,2,3,4]  or test[3]  not in [0,1,2,3,4]  or test[0]  not in [0,1,2,3,4]) :
 
-        if max(test)>4:
-            print("le chiffre max c'est 4")
+        if test[1] not in [0,1,2,3,4] or test[2]  not in [0,1,2,3,4]  or test[3]  not in [0,1,2,3,4]  or test[0]  not in [0,1,2,3,4]:
+            print("Les seuls chiffres autorise sont 0 1 2 3 4")
         else:
             print("on veut pas de doublon")
+
         test=demandechiffre()
 
+   
+
 def demandechiffre():
-    cf1,cf2,cf3,cf4= [int(x) for x in input("Rentre une combinaison : (4 chiffres sépare par des espaces de 0 a 4 qui doivent être différents )\n").split()]
-    return [cf1,cf2,cf3,cf4]
+    return [int(x) for x in input("Rentre une combinaison : (4 chiffres sépare par des espaces de 0 a 4 qui doivent être différents )\n").split()]
   
 def comparer(combi,test,reussite) :
+
     reussite["mauvais"],reussite["bon"]=0,0
     for i in range(4):
         if test[i] == combi[i]:
             reussite["bon"] += 1
         if  test[i] != combi[i] and test[i] in combi:
             reussite["mauvais"]+= 1
+   
     if reussite["bon"]==4:
         reussite["avis"]=1
     else:
