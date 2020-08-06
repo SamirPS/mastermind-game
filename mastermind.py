@@ -11,7 +11,7 @@ import itertools
 couleurchiffre=[0,1,2,3,4]
 
 choix=int(input("1)Trouve la combi fait par l'ia  2) Crée une combi que l'ia doit trouver \n"))
-while choix!=1 and choix!=2:
+while choix not in (1,2):
     choix=int(input("1)Trouve la combi fait par l'ia  2) Crée une combi que l'ia doit trouver \n"))
     
 pool=[]
@@ -73,11 +73,10 @@ def eliminate(ia, reussite, combiAEliminer):
     i=0
     if reussite["mauvais"]+reussite["bon"]==4:
         for i in range(0,4):
-            if ia[i] in combiAEliminer:
-                ia[i]=ia[i]
-            else :
+            if ia[i] not in combiAEliminer:
                 pool.remove(combiAEliminer)
                 break
+          
     elif  reussite["mauvais"]==2 and reussite["bon"]==0 or reussite["mauvais"]==0 and reussite["bon"]==2 :
         if ia[0] and ia[1] or  ia[2] and ia[3] in combiAEliminer :
             ia=ia
